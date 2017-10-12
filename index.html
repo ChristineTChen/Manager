@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+<head>
+  <title>Project Proposal</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <meta charset = "UTF-8" />
+</head>
+
+<body>
+  <h1>Team: Christine Chen & Rosaline (Ruisi) Su</h1>
+
+  <h3> 1) In a paragraph or two, what is your app idea? </h3>
+
+      <p> Our app idea is a management tool for the service and retail industry. Managers can add employees, schedule shifts, make notifications, and assign tasks. Employees are also able to log into their accounts and view their shifts and assigned tasks. </p>
+
+      <p> The app has a weekly preview and sends notifications 24 hours before an employee’s shift. Employees are able to contest a shift assignment on the app and propose a new time at the approval of their manager. Employees can request time off on the app. Managers can send out company-wide notifications. </p>
+
+  <h3> 2) What public API/dataset are you going to use?</h3>
+      <p>Our data set will mostly be from user input, like user data, calendar, shifts, and tasks. We would like to incorporate the Google Calendar public api to use for scheduling. Users can sync up their Google calendars and their work shifts. </p>
+
+  <h3> What data are you going to push to the client with websockets? </h3>
+      <h5> 1)General data applicable to both types of users: </h5>
+      <p> a) Work shifts scheduled for the upcoming week (weekly preview) </p>
+      <p> b) Current notifiations </p>
+
+      <h5> 2) User as the manager: </h5>
+      <p> a) Employees information </p>
+      <p> b) Make notifications (public/directed) </p>
+      <p> c) Approvals for changing upcoming shifts </p>
+
+      <h5> 3) User as the employee </h5>
+      <p> a) Manager information </p>
+      <p> b) Next upcoming shift </p>
+      <p> c) Sign-up for ships </p>
+      <p> d) Edit shifts (2 modes: incomplete and complete edit (approval from manager is made)) </p>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+</html>
