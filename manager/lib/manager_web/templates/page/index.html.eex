@@ -1,0 +1,10 @@
+<!-- lib/react_demo_web/templates/page/index.html.eex -->
+<!-- replace contents: -->
+
+<div id="header">
+  <p>Manager App</p>
+</div>
+
+<div id="main">
+  <p>Main</p>
+</div>
