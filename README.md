@@ -5,6 +5,8 @@
 Github Repo: https://github.com/ChristineTChen/Manager.git
 Domain: project.christinetchen.com
 
+The Manager App is a phoenix and reactJs application.
+
 Project Status: Manager app
 
   The project is still in it’s early stages of development. Our project progress has been delayed because we spent a significant amount of time trying to understand the documentation of the new frameworks and libraries, like OAuth and ReactJS, we are using in this web application. Currently, logging in with a Google account works and creating the relationships between employees, managers and teams. Our application is also able to handle messages like broadcasts and task assignments. 
