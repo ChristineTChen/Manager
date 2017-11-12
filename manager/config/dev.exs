@@ -47,3 +47,10 @@ config :logger, :console, format: "[$level] $message\n"
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+
+
+# config for google auth
+  config :manager, Google,
+    client_id: "113870760288-2vqb75bgh0ckm0sjo9lj8oi2t0eaue3t.apps.googleusercontent.com",
+    client_secret: "IzZGBSBy3pmUOhCgtp_v7VCs",
+    redirect_uri: "http://localhost:4000/auth/google/callback"
