@@ -42,8 +42,6 @@
       </header>
 
 
-    </div>
-
   </br>
 
       <%= if get_flash(@conn, :info) do %> 

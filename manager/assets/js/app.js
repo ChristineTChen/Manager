@@ -31,7 +31,7 @@ function renderHeader() {
 }
 
 function start() {
-  let html = <p> Manage your team schedules, shifts, and personal tasks connected to your Google Calendar!</p>;
+  let html = <p> Generate stuff</p>;
   let main = document.getElementById('main');
 
   ReactDOM.render(html, main);

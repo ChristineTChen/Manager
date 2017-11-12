@@ -2,17 +2,23 @@
 <!-- replace contents: -->
 
 <div id="header">
-	<%= if @current_user do %>
-  		<p>Welcome, <%= @current_user.first_name %> </p>
-  	<%= else %>
-  		<h3> Wecome to Manager App! </h3>
-  		<h5> Sign up with your Google account for easy access to your Google calendar. </h5>
-    <% end %>
 
-</div>
+<div style="background:transparent !important" class="jumbotron">
+
+  <%= if @current_user do %>
+
+  	<h3 class="display-3">Welcome, <%= @current_user.first_name %>!</h3>
+  <%= else %>
+  	<h3 class="display-3">Welcome to Manager App!</h3>
+ 	 <p class="lead"> Sign up with your Google account</p>
+  <% end %>
+  	<hr class="my-4">
+ 	 <p> Manage your team schedules, shifts, and personal tasks connected to your Google Calendar!</p>
+	</div>
 
 </br>
 
-<div id="main">
+	<div id="main">
 
+	</div>
 </div>
