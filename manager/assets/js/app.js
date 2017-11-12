@@ -27,11 +27,11 @@ import Header from './components/header';
 
 function renderHeader() {
   let div = document.getElementById('header');
-  ReactDOM.render(<Header />, div);
+  ReactDOM.render( <Header />, div);
 }
 
 function start() {
-  let html = <h1>Hello, World</h1>;
+  let html = <p> Manage your team schedules, shifts, and personal tasks connected to your Google Calendar!</p>;
   let main = document.getElementById('main');
 
   ReactDOM.render(html, main);

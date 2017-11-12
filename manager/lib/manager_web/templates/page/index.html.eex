@@ -2,9 +2,17 @@
 <!-- replace contents: -->
 
 <div id="header">
-  <p>Manager App</p>
+	<%= if @current_user do %>
+  		<p>Welcome, <%= @current_user.first_name %> </p>
+  	<%= else %>
+  		<h3> Wecome to Manager App! </h3>
+  		<h5> Sign up with your Google account for easy access to your Google calendar. </h5>
+    <% end %>
+
 </div>
 
+</br>
+
 <div id="main">
-  <p>Main</p>
+
 </div>
