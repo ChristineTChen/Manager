@@ -20,7 +20,7 @@
 
           <button class="navbar-toggler" type="button"
           data-toggle="collapse" data-target="#main-navbar">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
           </button>
 
             <ul class="navbar-nav ml-auto">
@@ -30,22 +30,18 @@
             <img src="<%= @current_user.avatar %>" class="img-circle"/>
             <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
           <% else %>
-            <br>
-            <br>
-
             <a class="btn btn-primary btn-lg" href="<%= auth_path @conn, :index, "google" %>">
               <i class="fa fa-google"></i>
               Sign in with Google
             </a>
           <% end %>
+
             </ul>
 
         </nav>
-
       </header>
-<div class="container">
 
-  </br>
+      <div class="container">
 
       <%= if get_flash(@conn, :info) do %> 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

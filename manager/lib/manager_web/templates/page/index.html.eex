@@ -3,22 +3,19 @@
 
 <div id="header">
 
-<div style="background:transparent !important" class="jumbotron">
+	<div style="background:transparent !important" class="jumbotron">
 
   <%= if @current_user do %>
-
   	<h4>Welcome, <%= @current_user.name %>!</h4>
   <% else %>
+
   	<h4>Welcome to Manager App!</h4>
  	 <p class="lead"> Sign up with your Google account</p>
   <% end %>
+
   	<hr class="my-4">
  	 <p> Manage your tasks and shifts connected to your Google Calendar!</p>
-	</div>
-
-</br>
-
-	<div id="main">
 
 	</div>
+
 </div>
