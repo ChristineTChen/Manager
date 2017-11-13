@@ -7,13 +7,13 @@
 
   <%= if @current_user do %>
 
-  	<h3 class="display-3">Welcome, <%= @current_user.first_name %>!</h3>
-  <%= else %>
-  	<h3 class="display-3">Welcome to Manager App!</h3>
+  	<h4>Welcome, <%= @current_user.name %>!</h4>
+  <% else %>
+  	<h4>Welcome to Manager App!</h4>
  	 <p class="lead"> Sign up with your Google account</p>
   <% end %>
   	<hr class="my-4">
- 	 <p> Manage your team schedules, shifts, and personal tasks connected to your Google Calendar!</p>
+ 	 <p> Manage your tasks and shifts connected to your Google Calendar!</p>
 	</div>
 
 </br>
