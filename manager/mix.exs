@@ -40,7 +40,9 @@ defmodule Manager.Mixfile do
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       {:poison, "~> 3.1"},
-      {:oauth2, "~> 0.9"}
+      {:oauth2, "~> 0.9"},
+      {:ecto, "~> 2.0"},
+      {:postgrex, "~> 0.11"}
     ]
   end
 end
