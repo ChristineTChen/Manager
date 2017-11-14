@@ -49,7 +49,7 @@ defmodule ManagerWeb.AuthController do
 
   defp get_user!("google", client) do
     %{body: user} = OAuth2.Client.get!(client, "https://www.googleapis.com/plus/v1/people/me/openIdConnect")
-    %{name: user["name"], avatar: user["picture"], token: client.token.access_token}
+    %{name: user["name"], avatar: user["picture"], email: user["email"], token: client.token.access_token}
   end
 
 end
