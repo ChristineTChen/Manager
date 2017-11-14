@@ -27,7 +27,7 @@
             
 
           <%= if @current_user do %>
-            <img src="<%= @current_user.avatar %>" class="img-circle"/>
+            <%= @current_user.name %>
             <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
           <% else %>
             <a class="btn btn-primary btn-lg" href="<%= auth_path @conn, :index, "google" %>">

@@ -2,6 +2,9 @@ defmodule ManagerWeb.AuthController do
   use ManagerWeb, :controller
   require Logger
 
+  alias Manager.User 
+  alias Manager.Repo
+
   @doc """
   This action is reached via `/auth/:provider` and redirects to the OAuth2 provider
   based on the chosen strategy.
@@ -34,10 +37,18 @@ defmodule ManagerWeb.AuthController do
     #
     # If you need to make additional resource requests, you may want to store
     # the access token as well.
-    conn
-    |> put_session(:current_user, user)
-    |> put_session(:access_token, client.token.access_token)
-    |> redirect(to: "/")
+    changeset = User.changeset(%User{}, user)
+    case find_or_insert_user(changeset) do 
+      {:ok, user} ->
+        conn
+        |> put_session(:current_user, user)
+        |> put_session(:access_token, client.token.access_token)
+        |> redirect(to: "/")
+      {:error, _reason} ->
+        conn
+        |> put_flash(:error, "Error signing in")
+        |> redirect("/")
+    end 
   end
 
   defp authorize_url!("google"),   do: Google.authorize_url!(scope: "https://www.googleapis.com/auth/userinfo.email")
@@ -49,7 +60,16 @@ defmodule ManagerWeb.AuthController do
 
   defp get_user!("google", client) do
     %{body: user} = OAuth2.Client.get!(client, "https://www.googleapis.com/plus/v1/people/me/openIdConnect")
-    %{name: user["name"], avatar: user["picture"], email: user["email"], token: client.token.access_token}
+    %{name: user["name"], email: user["email"], token: client.token.access_token}
   end
+
+  defp find_or_insert_user(changeset) do 
+    case Repo.get_by(User, email: changeset.changes.email) do 
+      nil ->
+        Repo.insert(changeset)
+      user ->
+        {:ok, user}
+    end 
+  end 
 
 end
