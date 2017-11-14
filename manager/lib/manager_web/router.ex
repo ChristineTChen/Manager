@@ -29,6 +29,9 @@ defmodule ManagerWeb.Router do
   scope "/", ManagerWeb do
     pipe_through :browser # Use the default browser stack
 
+    # google cal resource
+    get "/gcal", GCalController, :index
+
     get "/", PageController, :index
   end
 
