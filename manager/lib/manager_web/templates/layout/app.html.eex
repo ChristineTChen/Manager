@@ -7,38 +7,48 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Manager!</title>
+    <title>Manager App</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
+    
       <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
+         <nav class="navbar navbar-expand-lg navbar-dark bg-info rounded">
+
+          <a class="navbar-brand" href="/">ManagerApp</a>
+
+          <button class="navbar-toggler" type="button"
+          data-toggle="collapse" data-target="#main-navbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+            <ul class="navbar-nav ml-auto">
+            
+
+          <%= if @current_user do %>
+            <img src="<%= @current_user.avatar %>" class="img-circle"/>
+            <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+          <% else %>
+            <a class="btn btn-primary btn-lg" href="<%= auth_path @conn, :index, "google" %>">
+              <i class="fa fa-google"></i>
+              Sign in with Google
+            </a>
+          <% end %>
+
+            </ul>
+
         </nav>
-        <span class="logo"></span>
       </header>
 
-      <%= if @current_user do %>
-        <h2>Welcome, <%= @current_user.name %>!</h2>
-        <img src="<%= @current_user.avatar %>" class="img-circle"/>
-        <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
-      <% else %>
-        <br>
-        <br>
+      <div class="container">
 
-        <a class="btn btn-primary btn-lg" href="<%= auth_path @conn, :index, "google" %>">
-          <i class="fa fa-google"></i>
-          Sign in with Google
-        </a>
-      <% end %>
-    </div>
-
+      <%= if get_flash(@conn, :info) do %> 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <% end %>
+      <%= if get_flash(@conn, :error) do %> 
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <% end %>
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
@@ -47,4 +57,5 @@
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
+
 </html>
