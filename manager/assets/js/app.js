@@ -24,17 +24,15 @@ import "phoenix_html"
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/header';
-
-function renderHeader() {
-  let div = document.getElementById('header');
-  ReactDOM.render( <Header />, div);
-}
+import Tasks from './components/tasks';
 
 function start() {
-  let html = <p> Generate stuff</p>;
-  let main = document.getElementById('main');
+  let html = <div> 
+		  <Tasks/>
+	  </div>;
+  let main = document.getElementById('reactstuff');
 
   ReactDOM.render(html, main);
 }
 
-$(start);
+$(start)
