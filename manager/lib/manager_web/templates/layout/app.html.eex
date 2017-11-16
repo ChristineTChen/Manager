@@ -29,7 +29,9 @@
 
 
           <%= if @current_user do %>
+
             <div id="logout-button">
+              <%= @current_user.name %>
               <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
             </div>
           <% else %>
