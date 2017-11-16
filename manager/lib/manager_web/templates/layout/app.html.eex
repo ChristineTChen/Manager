@@ -25,6 +25,20 @@
             <span class="navbar-toggler-icon"></span>
           </button>
 
+
+          <%= if @current_user do %>
+          <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+               <%= link "Tasks", to: page_path(@conn, :index), class: "nav-link" %>
+             </li>
+             <li class="nav-item">
+               <%= link "Teams", to: page_path(@conn, :index), class: "nav-link" %>
+             </li>
+           </ul>
+           <% end %>
+
+
             <ul class="navbar-nav ml-auto">
 
 
