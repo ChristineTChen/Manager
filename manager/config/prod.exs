@@ -16,6 +16,7 @@ use Mix.Config
 config :manager, ManagerWeb.Endpoint,
   load_from_system_env: true,
   url: [host: "example.com", port: 80],
+  server: true,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -58,7 +59,15 @@ config :logger, level: :info
 #
 #     config :manager, ManagerWeb.Endpoint, server: true
 #
+config :manager, Manager.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "manager_repo",
+  hostname: "localhost",
+  pool_size: 10
+	
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+#import_config "prod.secret.exs"
