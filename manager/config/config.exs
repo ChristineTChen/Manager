@@ -5,6 +5,16 @@
 # is restricted to this project.
 use Mix.Config
 
+config :manager, Manager.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  database: "manager_repo",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost"
+
+config :manager,
+  ecto_repos: [Manager.Repo]
+
 # Configures the endpoint
 config :manager, ManagerWeb.Endpoint,
   url: [host: "localhost"],
@@ -21,3 +31,5 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+

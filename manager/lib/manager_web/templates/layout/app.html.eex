@@ -29,7 +29,6 @@
 
 
           <%= if @current_user do %>
-            <img src="<%= @current_user.avatar %>" class="img-circle"/>
             <div id="logout-button">
               <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
             </div>
