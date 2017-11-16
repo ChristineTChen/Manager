@@ -29,6 +29,7 @@ defmodule ManagerWeb.AuthController do
   """
   def callback(conn, %{"provider" => provider, "code" => code}) do
     client = get_token!(provider, code)
+    Logger.info "whats the client #{client.token.access_token}"
     user = get_user!(provider, client)
     # Store the user in the session under `:current_user` and redirect to /.
     # In most cases, we'd probably just store the user's ID that can be used
