@@ -25,10 +25,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/header';
 import Tasks from './components/tasks';
+import TabMenu from './components/tabs';
 
 function start() {
   let html = <div> 
-		  <Tasks/>
+		  <TabMenu/>
 	  </div>;
   let main = document.getElementById('reactstuff');
 
