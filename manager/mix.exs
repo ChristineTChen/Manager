@@ -42,7 +42,8 @@ defmodule Manager.Mixfile do
       {:poison, "~> 3.1"},
       {:oauth2, "~> 0.9"},
       {:ecto, "~> 2.0"},
-      {:postgrex, "~> 0.11"}
+      {:postgrex, "~> 0.11"},
+      {:distillery, "~> 1.5", runtime: false}
     ]
   end
 end
