@@ -41,6 +41,8 @@ defmodule ManagerWeb.AuthController do
   end
 
   defp authorize_url!("google"),   do: Google.authorize_url!(scope: "https://www.googleapis.com/auth/userinfo.email")
+  # defp authorize_url!("google"),   do: Google.authorize_url!(scope: "https://www.googleapis.com/auth/calendar")
+
   defp authorize_url!(_), do: raise "No matching provider available"
 
   defp get_token!("google", code),  do: Google.get_token!(code: code)
@@ -49,6 +51,7 @@ defmodule ManagerWeb.AuthController do
 
   defp get_user!("google", client) do
     %{body: user} = OAuth2.Client.get!(client, "https://www.googleapis.com/plus/v1/people/me/openIdConnect")
+    Logger.info "what's the user #{inspect user}"
     %{name: user["name"], avatar: user["picture"], token: client.token.access_token}
   end
 

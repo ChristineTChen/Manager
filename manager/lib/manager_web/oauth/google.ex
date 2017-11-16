@@ -8,25 +8,7 @@ defmodule Google do
 
   alias OAuth2.Strategy.AuthCode
 
-  # defp config do
-  #   [strategy: Google,
-  #   site: "https://accounts.google.com",
-  #   authorize_url: "/o/oauth2/auth",
-  #   client_id: "113870760288-2vqb75bgh0ckm0sjo9lj8oi2t0eaue3t.apps.googleusercontent.com",
-  #   client_secret: "IzZGBSBy3pmUOhCgtp_v7VCs",
-  #   #redirect_uri: System.get_env("GOOGLE_REDIRECT_URI"),
-  #   redirect_uri: "http://localhost:4000/auth/google/callback",
-  #   token_url: "/o/oauth2/token"]
-  # end
-
   # Public API
-
-  # def client do
-  #   Logger.info "calling get_env client #{inspect Application.get_env(:permission, Google)}"
-  #   Application.get_env(:permission, Google)
-  #   |> Keyword.merge(config())
-  #   |> OAuth2.Client.new()
-  # end
 
   def client do
     OAuth2.Client.new([
@@ -35,9 +17,14 @@ defmodule Google do
         authorize_url: "/o/oauth2/auth",
         token_url: "/o/oauth2/token",
 
+        #google api
         client_id: "113870760288-2vqb75bgh0ckm0sjo9lj8oi2t0eaue3t.apps.googleusercontent.com",
         client_secret: "IzZGBSBy3pmUOhCgtp_v7VCs",
-        #redirect_uri: System.get_env("GOOGLE_REDIRECT_URI"),
+
+        # #google cal apiKey
+        # client_id: "113870760288-vjo6vgfavr4gg6tg2s8elm2r8e4qjp2d.apps.googleusercontent.com",
+        # client_secret: "ktFAM_8AHsIPwZJ8DxsdD4g7",
+        # api_key: "AIzaSyCpA-b0Yx6r6Qf2vH2wlYNg8p4Up-oPL18",
         redirect_uri: "http://localhost:4000/auth/google/callback"
       ])
   end

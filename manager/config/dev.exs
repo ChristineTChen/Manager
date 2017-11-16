@@ -53,4 +53,7 @@ config :phoenix, :stacktrace_depth, 20
   config :manager, Google,
     client_id: "113870760288-2vqb75bgh0ckm0sjo9lj8oi2t0eaue3t.apps.googleusercontent.com",
     client_secret: "IzZGBSBy3pmUOhCgtp_v7VCs",
+    # #google cal apiKey
+    # client_id: "113870760288-vjo6vgfavr4gg6tg2s8elm2r8e4qjp2d.apps.googleusercontent.com",
+    # client_secret: "ktFAM_8AHsIPwZJ8DxsdD4g7",
     redirect_uri: "http://localhost:4000/auth/google/callback"
