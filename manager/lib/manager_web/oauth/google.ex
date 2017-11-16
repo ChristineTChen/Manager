@@ -25,7 +25,7 @@ defmodule Google do
         # client_id: "113870760288-vjo6vgfavr4gg6tg2s8elm2r8e4qjp2d.apps.googleusercontent.com",
         # client_secret: "ktFAM_8AHsIPwZJ8DxsdD4g7",
         # api_key: "AIzaSyCpA-b0Yx6r6Qf2vH2wlYNg8p4Up-oPL18",
-        redirect_uri: "http://localhost:4000/auth/google/callback"
+        redirect_uri: "http://manager.cristinetchen.com/auth/google/callback"
       ])
   end
 
