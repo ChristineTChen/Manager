@@ -58,7 +58,15 @@ config :logger, level: :info
 #
 #     config :manager, ManagerWeb.Endpoint, server: true
 #
+config :manager, Manager.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "manager_repo",
+  hostname: "localhost",
+  pool_size: 10
+	
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+#import_config "prod.secret.exs"
