@@ -13,11 +13,6 @@ class TabMenu extends React.Component {
       return (
          <div>
             <Navbar>
-            	<Navbar.Header>
-            		<Navbar.Brand>	
-            			<a href="#"> Manager App </a>
-            		</Navbar.Brand>
-            	</Navbar.Header>
 	            <Nav pullRight>
 	            	<NavItem eventKey={1} href='#'> View Profile </NavItem>
 	            </Nav>
