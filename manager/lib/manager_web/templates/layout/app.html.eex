@@ -1,80 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Manager App</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+  <title>Manager App</title>
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-      <header class="header">
-         <nav class="navbar navbar-expand-lg navbar-dark bg-info rounded">
+  <header class="header">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-info rounded">
 
-          <a class="navbar-brand" href="/">ManagerApp</a>
+      <a class="navbar-brand" href="/">ManagerApp</a>
 
-          <button class="navbar-toggler" type="button"
-          data-toggle="collapse" data-target="#main-navbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+      <button class="navbar-toggler" type="button"
+      data-toggle="collapse" data-target="#main-navbar">
+      <span class="navbar-toggler-icon"></span>
+      </button>
 
-          <%= if @current_user do %>
-          <div class="collapse navbar-collapse" id="main-navbar">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-               <%= link "Tasks", to: page_path(@conn, :index), class: "nav-link" %>
-             </li>
-             <li class="nav-item">
-               <%= link "Teams", to: page_path(@conn, :index), class: "nav-link" %>
-             </li>
-           </ul>
-           <% end %>
-
-            <ul class="navbar-nav ml-auto">
-
-
-          <%= if @current_user do %>
-
-            <div id="logout-button">
-              <%= @current_user.name %>
-              <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
-            </div>
-          <% else %>
-          <div id="signin-button">
-              <a class="btn btn-primary btn-lg" href="<%= auth_path @conn, :index, "google" %>">
-                <i class="fa fa-google"></i>
-                Sign in with Google
-              </a>
-          </div>
-          <% end %>
-
-            </ul>
-
-        </nav>
-      </header>
-
-      <div class="container">
-
-      <%= if get_flash(@conn, :info) do %>
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <% end %>
-      <%= if get_flash(@conn, :error) do %>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <%= if @current_user do %>
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link "Tasks", to: page_path(@conn, :index), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link "Teams", to: page_path(@conn, :index), class: "nav-link" %>
+        </li>
+      </ul>
       <% end %>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+      <ul class="navbar-nav ml-auto">
 
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  </body>
+
+        <!-- <%= if @current_user do %>
+
+        <div id="logout-button">
+          <%= @current_user.name %>
+          <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+        </div>
+        <% else %>
+        <div id="signin-button">
+          <a class="btn btn-primary btn-lg" href="<%= auth_path @conn, :index, "google" %>">
+            <i class="fa fa-google"></i>
+            Sign in with Google
+          </a>
+        </div>
+        <% end %> -->
+
+
+
+        <button id="app-authorize-button" class="btn btn-primary"style="display: none;">Authorize</button>
+        <button id="app-signout-button" class="btn btn-primary"style="display: none;">Sign Out</button>
+
+        <script type="text/script">
+        // Client ID and API key from the Developer Console
+        var CLIENT_ID = "113870760288-vjo6vgfavr4gg6tg2s8elm2r8e4qjp2d.apps.googleusercontent.com";
+        var API_KEY = "AIzaSyCpA-b0Yx6r6Qf2vH2wlYNg8p4Up-oPL18";
+
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        var SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/plus.login";
+
+        var authorizeButton = document.getElementById('app-authorize-button');
+        var signoutButton = document.getElementById('app-signout-button');
+
+        /**
+        *  On load, called to load the auth2 library and API client library.
+        */
+        function handleClientLoad() {
+          gapi.load('client:auth2', initClient);
+          // load calendar client library
+         // gapi.client.load('calendar', 'v3', handleCreateClick);
+          // gapi.client.load('plus', 'v1', logName);
+          // console.log("handleClientLoad is called");
+        }
+
+        var GoogleAuth;
+        /**
+        *  Initializes the API client library and sets up sign-in state
+        *  listeners.
+        */
+        function initClient() {
+          client2 = gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
+          }).then(function () {
+            GoogleAuth = gapi.auth2.getAuthInstance();
+            // Listen for sign-in state changes.
+            GoogleAuth.isSignedIn.listen(updateSigninStatus);
+
+            // Handle the initial sign-in state.
+            updateSigninStatus(GoogleAuth.isSignedIn.get());
+            authorizeButton.onclick = handleAuthClick;
+            signoutButton.onclick = handleSignoutClick;
+            // calling create event
+            createButton.onclick = handleCreateClick;
+          });
+        }
+
+        /**
+        *  Called when the signed in status changes, to update the UI
+        *  appropriately. After a sign-in, the API is called.
+        */
+        function updateSigninStatus(isSignedIn) {
+          if (isSignedIn) {
+            authorizeButton.style.display = 'none';
+            signoutButton.style.display = 'block';
+            listUpcomingEvents();
+            logName();
+
+          } else {
+            authorizeButton.style.display = 'block';
+            signoutButton.style.display = 'none';
+          }
+        }
+
+        function logName(event) {
+
+          gapi.client.load('plus', 'v1', function () {
+            var request = gapi.client.plus.people.get({
+              'userId': 'me'
+            });
+
+            request.execute(function (resp) {
+              console.log(resp);
+              alert(resp.displayName);
+              alert(resp.emails[0].value);
+            })
+          })
+        }
+
+        /**
+        *  Sign in the user upon button click.
+        */
+        function handleAuthClick(event) {
+          GoogleAuth.signIn();
+        }
+
+        /**
+        *  Sign out the user upon button click.
+        */
+        function handleSignoutClick(event) {
+          GoogleAuth.signOut();
+        }
+
+
+        }
+
+        </script>
+        <script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+        </script>
+
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <%= if get_flash(@conn, :info) do %>
+    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+    <% end %>
+    <%= if get_flash(@conn, :error) do %>
+    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+    <% end %>
+
+    <main role="main">
+      <%= render @view_module, @view_template, assigns %>
+    </main>
+
+  </div> <!-- /container -->
+  <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+</body>
 
 </html>

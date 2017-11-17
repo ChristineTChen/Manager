@@ -64,7 +64,7 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/
 
 // Authorization scopes required by the API; multiple scopes can be
 // included, separated by spaces.
-var SCOPES = "https://www.googleapis.com/auth/calendar";
+var SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/plus.login";
 
 var authorizeButton = document.getElementById('authorize-button');
 var signoutButton = document.getElementById('signout-button');
@@ -78,25 +78,29 @@ var createButton = document.getElementById('create-button');
 function handleClientLoad() {
   gapi.load('client:auth2', initClient);
   // load calendar client library
-  gapi.client.load('calendar', 'v3', handleCreateClick);
+ // gapi.client.load('calendar', 'v3', handleCreateClick);
+  // gapi.client.load('plus', 'v1', logName);
+  // console.log("handleClientLoad is called");
 }
 
+var GoogleAuth;
 /**
 *  Initializes the API client library and sets up sign-in state
 *  listeners.
 */
 function initClient() {
-  gapi.client.init({
+  client2 = gapi.client.init({
     apiKey: API_KEY,
     clientId: CLIENT_ID,
     discoveryDocs: DISCOVERY_DOCS,
     scope: SCOPES
   }).then(function () {
+    GoogleAuth = gapi.auth2.getAuthInstance();
     // Listen for sign-in state changes.
-    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+    GoogleAuth.isSignedIn.listen(updateSigninStatus);
 
     // Handle the initial sign-in state.
-    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    updateSigninStatus(GoogleAuth.isSignedIn.get());
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
     // calling create event
@@ -113,24 +117,53 @@ function updateSigninStatus(isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
     listUpcomingEvents();
+    logName();
+
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
   }
 }
 
+function logName(event) {
+
+  gapi.client.load('plus', 'v1', function () {
+    var request = gapi.client.plus.people.get({
+      'userId': 'me'
+    });
+
+    request.execute(function (resp) {
+      console.log(resp);
+      alert(resp.displayName);
+      alert(resp.emails[0].value);
+    })
+  })
+//   gapi.client.plus.people.list({
+//   'userId': 'me',
+//   'collection': 'visible'
+// }).then(function(res) {
+//   var people = res.result;
+//   appendPre('Number of people visible to this app: ' +
+//       people.totalItems + '<br/>');
+//   for (var personIndex in people.items) {
+//     person = people.items[personIndex];
+//     appendPre('<img src="' + person.image.url + '">');
+//   }
+// });
+}
+
 /**
 *  Sign in the user upon button click.
 */
 function handleAuthClick(event) {
-  gapi.auth2.getAuthInstance().signIn();
+  GoogleAuth.signIn();
 }
 
 /**
 *  Sign out the user upon button click.
 */
 function handleSignoutClick(event) {
-  gapi.auth2.getAuthInstance().signOut();
+  GoogleAuth.signOut();
 }
 
 /**
