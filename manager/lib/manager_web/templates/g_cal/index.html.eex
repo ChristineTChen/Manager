@@ -6,9 +6,14 @@ https://stackoverflow.com/questions/41589499/undefined-htmllink-google-calendar-
 <p>Google Calendar API Quickstart</p>
 
 <!--Add buttons to initiate auth sequence and sign out-->
-<button id="authorize-button" class="btn btn-primary"style="display: none;">Authorize</button>
-<button id="signout-button" class="btn btn-primary"style="display: none;">Sign Out</button>
+
+<!-- authorize in page/app -->
+<!-- <button id="authorize-button" class="btn btn-primary"style="display: none;">Authorize</button>
+<button id="signout-button" class="btn btn-primary"style="display: none;">Sign Out</button> -->
+
 <button id="create-button" class="btn btn-primary" >Create</button>
+<!-- <button id="get-user-button" class="btn btn-primary" >User</button> -->
+
 <form>
   <div class="form-group row">
     <label for="summary">Summary: </label>
@@ -66,10 +71,14 @@ var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/
 // included, separated by spaces.
 var SCOPES = "https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/plus.login";
 
-var authorizeButton = document.getElementById('authorize-button');
-var signoutButton = document.getElementById('signout-button');
+
+// authorize buttons are in page/app html
+
+// var authorizeButton = document.getElementById('authorize-button');
+// var signoutButton = document.getElementById('signout-button');
 // adding create event button
 var createButton = document.getElementById('create-button');
+// var userButton = document.getElementById('get-user-button');
 
 
 /**
@@ -80,7 +89,7 @@ function handleClientLoad() {
   // load calendar client library
  // gapi.client.load('calendar', 'v3', handleCreateClick);
   // gapi.client.load('plus', 'v1', logName);
-  // console.log("handleClientLoad is called");
+  console.log("handleClientLoad is called");
 }
 
 var GoogleAuth;
@@ -89,41 +98,52 @@ var GoogleAuth;
 *  listeners.
 */
 function initClient() {
-  client2 = gapi.client.init({
+  gapi.client.init({
     apiKey: API_KEY,
     clientId: CLIENT_ID,
     discoveryDocs: DISCOVERY_DOCS,
     scope: SCOPES
   }).then(function () {
     GoogleAuth = gapi.auth2.getAuthInstance();
-    // Listen for sign-in state changes.
-    GoogleAuth.isSignedIn.listen(updateSigninStatus);
 
-    // Handle the initial sign-in state.
-    updateSigninStatus(GoogleAuth.isSignedIn.get());
-    authorizeButton.onclick = handleAuthClick;
-    signoutButton.onclick = handleSignoutClick;
+    // listeners are done in the page/app html
+
+    // // Listen for sign-in state changes.
+    // GoogleAuth.isSignedIn.listen(updateSigninStatus);
+    //
+    // // Handle the initial sign-in state.
+    // updateSigninStatus(GoogleAuth.isSignedIn.get());
+
+    // auth buttons are handled in page/app html
+
+    // authorizeButton.onclick = handleAuthClick;
+    // signoutButton.onclick = handleSignoutClick;
     // calling create event
     createButton.onclick = handleCreateClick;
+
+    // making sure gcal gets the page/app authorized google user
+    // userButton.onclick = handleUserClick;
+
+    res = gapi.auth2.getAuthInstance().isSignedIn.get();
+    console.log("handle user click result " + res);
+
   });
 }
 
-/**
-*  Called when the signed in status changes, to update the UI
-*  appropriately. After a sign-in, the API is called.
-*/
-function updateSigninStatus(isSignedIn) {
-  if (isSignedIn) {
-    authorizeButton.style.display = 'none';
-    signoutButton.style.display = 'block';
-    listUpcomingEvents();
-    logName();
-
-  } else {
-    authorizeButton.style.display = 'block';
-    signoutButton.style.display = 'none';
-  }
-}
+// /**
+// *  Called when the signed in status changes, to update the UI
+// *  appropriately. After a sign-in, the API is called.
+// */
+// function updateSigninStatus(isSignedIn) {
+//   if (isSignedIn) {
+//     authorizeButton.style.display = 'none';
+//     signoutButton.style.display = 'block';
+//     listUpcomingEvents();
+//   } else {
+//     authorizeButton.style.display = 'block';
+//     signoutButton.style.display = 'none';
+//   }
+// }
 
 function logName(event) {
 
@@ -134,37 +154,31 @@ function logName(event) {
 
     request.execute(function (resp) {
       console.log(resp);
-      alert(resp.displayName);
-      alert(resp.emails[0].value);
+      console.log("user name " + resp.displayName);
+      console.log("user email " + resp.emails[0].value);
     })
   })
-//   gapi.client.plus.people.list({
-//   'userId': 'me',
-//   'collection': 'visible'
-// }).then(function(res) {
-//   var people = res.result;
-//   appendPre('Number of people visible to this app: ' +
-//       people.totalItems + '<br/>');
-//   for (var personIndex in people.items) {
-//     person = people.items[personIndex];
-//     appendPre('<img src="' + person.image.url + '">');
-//   }
-// });
 }
 
-/**
-*  Sign in the user upon button click.
-*/
-function handleAuthClick(event) {
-  GoogleAuth.signIn();
-}
+// sign in/out are handled in the page/app html
+// /**
+// *  Sign in the user upon button click.
+// */
+// function handleAuthClick(event) {
+//   GoogleAuth.signIn();
+// }
+//
+// /**
+// *  Sign out the user upon button click.
+// */
+// function handleSignoutClick(event) {
+//   GoogleAuth.signOut();
+// }
 
-/**
-*  Sign out the user upon button click.
-*/
-function handleSignoutClick(event) {
-  GoogleAuth.signOut();
-}
+// function handleUserClick(event) {
+//   res = gapi.auth2.getAuthInstance().isSignedIn.get();
+//   console.log("handle user click result " + res);
+// }
 
 /**
 * Append a pre element to the body containing the given message
@@ -184,7 +198,6 @@ function appendPre(message) {
 * appropriate message is printed.
 */
 function listUpcomingEvents() {
-  //console.log("client "+ gapi.client.calendar.events.list.get());
   gapi.client.calendar.events.list({
     'calendarId': 'primary',
     'timeMin': (new Date()).toISOString(),
