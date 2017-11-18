@@ -17,6 +17,9 @@ defmodule ManagerWeb.Router do
   scope "/auth", ManagerWeb do
     pipe_through :browser
 
+    post "/sessions", SessionController, :login
+    delete "/sessions", SessionController, :logout
+
     get "/:provider", AuthController, :index
     get "/:provider/callback", AuthController, :callback
     delete "/logout", AuthController, :delete
