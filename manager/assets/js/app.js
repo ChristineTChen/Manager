@@ -34,6 +34,33 @@ function start() {
   let main = document.getElementById('reactstuff');
 
   ReactDOM.render(html, main);
+
+
+
+  // Retrieve teams of user
+  let my_manager;
+  let manager;
+
+  function fetch_team() {
+  	function get_manager(data) {
+  		console.log(data);
+  		my_manager = data;
+  		//manager =
+  		
+
+  	}
+
+  	$.ajax({
+  		url: path,
+  		data: {employee_id: current_user},
+  		contentType: "application/json",
+  		dataType: "json",
+  		method: "GET",
+  		success: got_likes,
+  	});
+  }
+
+
 }
 
 $(start)

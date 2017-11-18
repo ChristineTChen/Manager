@@ -11,6 +11,7 @@ defmodule ManagerWeb.TeamController do
     render(conn, "index.json", teams: teams)
   end
 
+
   def create(conn, %{"team" => team_params}) do
     with {:ok, %Team{} = team} <- Accounts.create_team(team_params) do
       conn

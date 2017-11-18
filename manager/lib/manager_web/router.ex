@@ -31,7 +31,7 @@ defmodule ManagerWeb.Router do
 
     # google cal resource
     get "/gcal", GCalController, :index
-
+    get "/teams", TeamsController, :index
     get "/", PageController, :index
   end
 
