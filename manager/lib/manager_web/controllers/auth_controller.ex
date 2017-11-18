@@ -38,18 +38,10 @@ defmodule ManagerWeb.AuthController do
     #
     # If you need to make additional resource requests, you may want to store
     # the access token as well.
-    changeset = User.changeset(%User{}, user)
-    case find_or_insert_user(changeset) do
-      {:ok, user} ->
-        conn
-        |> put_session(:current_user, user)
-        |> put_session(:access_token, client.token.access_token)
-        |> redirect(to: "/")
-      {:error, _reason} ->
-        conn
-        |> put_flash(:error, "Error signing in")
-        |> redirect("/")
-    end
+    conn
+    |> put_session(:current_user, user)
+    |> put_session(:access_token, client.token.access_token)
+    |> redirect(to: "/")
   end
 
   defp authorize_url!("google"),   do: Google.authorize_url!(scope: "https://www.googleapis.com/auth/userinfo.email")

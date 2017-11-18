@@ -5,9 +5,9 @@ defmodule Manager.Repo.Migrations.CreateUsers do
     create table(:users) do
       add :name, :string
       add :email, :string
-      add :token, :string
       add :isManager?, :boolean, default: false, null: false
       add :isAdmin?, :boolean, default: false, null: false
+      add :token, :string
 
       timestamps()
     end

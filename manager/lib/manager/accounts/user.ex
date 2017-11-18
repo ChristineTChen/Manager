@@ -1,7 +1,7 @@
-defmodule Manager.User do
+defmodule Manager.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Manager.User
+  alias Manager.Accounts.User
 
 
   schema "users" do
@@ -17,7 +17,7 @@ defmodule Manager.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :token, :isManager?, :isAdmin?])
-    |> validate_required([:name, :email, :token, :isManager?, :isAdmin?])
+    |> cast(attrs, [:name, :email, :isManager?, :isAdmin?, :token])
+    |> validate_required([:name, :email, :isManager?, :isAdmin?, :token])
   end
 end

@@ -38,7 +38,8 @@ defmodule ManagerWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", ManagerWeb do
     pipe_through :api
-
+    
+    resources "/users", UserController, except: [:new, :edit]
     resources "/teams", TeamController, except: [:new, :edit]
     resources "/tasks", TaskController, except: [:new, :edit]
 
