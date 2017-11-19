@@ -37,11 +37,16 @@
           <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-               <%= link "My Tasks", to: page_path(@conn, :index), class: "nav-link" %>
+               <%= link "Dashboard", to: page_path(@conn, :index), class: "nav-link" %>
              </li>
              <li class="nav-item">
-               <%= link "My Teams", to: teams_path(@conn, :index), class: "nav-link" %>
+               <%= link "Teammates", to: teams_path(@conn, :index), class: "nav-link" %>
              </li>
+
+             <li class="nav-item">
+               <a class="nav-link" href="/gcal">Create Calendar Event</a>
+             </li>
+
            </ul>
            <% end %>
 
