@@ -2,7 +2,7 @@ defmodule ManagerWeb.AuthController do
   use ManagerWeb, :controller
   require Logger
 
-  alias Manager.User
+  alias Manager.Accounts.User
   alias Manager.Repo
 
   @doc """
@@ -38,10 +38,22 @@ defmodule ManagerWeb.AuthController do
     #
     # If you need to make additional resource requests, you may want to store
     # the access token as well.
-    conn
-    |> put_session(:current_user, user)
-    |> put_session(:access_token, client.token.access_token)
-    |> redirect(to: "/")
+    #conn
+    #|> put_session(:current_user, user)
+    #|> put_session(:access_token, client.token.access_token)
+    #|> redirect(to: "/")
+    changeset = Manager.Accounts.User.changeset(%User{}, user)
+    case find_or_insert_user(changeset) do
+      {:ok, user} ->
+        conn
+        |> put_session(:current_user, user)
+        |> put_session(:access_token, client.token.access_token)
+        |> redirect(to: "/")
+      {:error, _reason} ->
+        conn
+        |> put_flash(:error, "Error signing in")
+        |> redirect("/")
+    end
   end
 
   defp authorize_url!("google"),   do: Google.authorize_url!(scope: "https://www.googleapis.com/auth/userinfo.email")

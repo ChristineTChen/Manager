@@ -43,6 +43,10 @@ class Tasks extends React.Component {
 	}
 
 	render() {
+	if (!window.user_name){
+		return null;
+	}
+
       return (
       	<div>
             <PageHeader>Bulletin Board</PageHeader>
