@@ -11,8 +11,9 @@ defmodule ManagerWeb.TaskController do
     render(conn, "index.json", tasks: tasks)
   end
 
-  def index(conn, _params) do 
-    tasks = Accounts.list_tasks()
+  def index(conn, %{"assignee_id" => assignee_id}) do 
+    tasks = Accounts.list_tasks_by_assignee(assignee_id)
+    render(conn, "index.json", tasks: tasks)
   end
 
   def create(conn, %{"task" => task_params}) do

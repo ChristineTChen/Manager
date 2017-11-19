@@ -21,6 +21,11 @@ defmodule Manager.Accounts do
     Repo.all(Team)
   end
 
+
+  def list_teammates(manager_id) do
+    Repo.all(from l in Team, where: l.manager_id == ^manager_id)
+    |> Repo.preload(:user)
+  end
   @doc """
   Gets a single team.
 
@@ -131,6 +136,12 @@ defmodule Manager.Accounts do
       ** (Ecto.NoResultsError)
 
   """
+
+  def list_tasks_by_assignee(assignee_id) do 
+    Repo.all(from l in Task, where: l.assignee_id == ^assignee_id)
+    |> Repo.preload(:user)
+  end
+
   def get_task!(id), do: Repo.get!(Task, id)
 
   @doc """

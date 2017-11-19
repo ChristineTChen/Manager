@@ -10,6 +10,7 @@ defmodule Manager.Accounts.User do
     field :isManager?, :boolean, default: false
     field :name, :string
     field :token, :string
+    has_many :tasks, Manager.Accounts.Task
 
     timestamps()
   end

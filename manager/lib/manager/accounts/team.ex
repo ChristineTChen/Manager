@@ -5,8 +5,9 @@ defmodule Manager.Accounts.Team do
 
 
   schema "teams" do
-    field :manager_id, :id
-    field :member_id, :id
+
+    belongs_to :manager_user, Manager.Accounts.User
+    belongs_to :member_user, Manager.Accounts.User
 
     timestamps()
   end
@@ -14,7 +15,7 @@ defmodule Manager.Accounts.Team do
   @doc false
   def changeset(%Team{} = team, attrs) do
     team
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:manager_id, :member_id])
+    |> validate_required([:manager_id, :member_id])
   end
 end

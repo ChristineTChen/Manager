@@ -1,13 +1,16 @@
 import React from 'react';
 import {PageHeader, Grid, Row, Col, Thumbnail, Button} from 'react-bootstrap';
 
+console.log("HERE!", PageHeader, Grid, Row, Col, Thumbnail, Button)
+
 
 class Tasks extends React.Component {
 
 	render() {
+		console.log('fjdlfjsldajfklsjafkldjkalsjfsk')
       return (
       	<div>
-            <PageHeader> Your assigned tasks</PageHeader>
+            <PageHeader>Your assigned tasks</PageHeader>
 
             <Grid>
 			    <Row>

@@ -1,4 +1,4 @@
-defmodule ManagerWeb.TeamController do
+ defmodule ManagerWeb.TeamController do
   use ManagerWeb, :controller
 
   alias Manager.Accounts
@@ -11,6 +11,10 @@ defmodule ManagerWeb.TeamController do
     render(conn, "index.json", teams: teams)
   end
 
+  def index(conn, %{"manager_id" => manager_id}) do 
+    team= Accounts.list_teammates(manager_id)
+    render(conn, "index.json", team: team)
+  end 
 
   def create(conn, %{"team" => team_params}) do
     with {:ok, %Team{} = team} <- Accounts.create_team(team_params) do

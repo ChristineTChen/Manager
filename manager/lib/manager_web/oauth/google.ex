@@ -20,7 +20,8 @@ defmodule Google do
         #google api
         client_id: "113870760288-2vqb75bgh0ckm0sjo9lj8oi2t0eaue3t.apps.googleusercontent.com",
         client_secret: "3LOZLHg195ztuSyAq3cpWaib",
-        redirect_uri: "http://manager.christinetchen.com/auth/google/callback/"
+        redirect_uri: "http://localhost:4000/auth/google/callback"
+        #redirect_uri: "http://manager.christinetchen.com/auth/google/callback/"
       ])
   end
 

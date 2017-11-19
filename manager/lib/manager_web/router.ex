@@ -12,6 +12,7 @@ defmodule ManagerWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
   end
 
   scope "/auth", ManagerWeb do
@@ -36,7 +37,7 @@ defmodule ManagerWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", ManagerWeb do
+  scope "/api/v1", ManagerWeb do
     pipe_through :api
     
     resources "/users", UserController, except: [:new, :edit]

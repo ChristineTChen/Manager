@@ -10,15 +10,12 @@ class TabMenu extends React.Component {
 
 
    render() {
+      console.log('christine y', Tasks)
+      debugger
       return (
          <div>
 
-			<Tabs defaultActiveKey={1} animation={false} id="noanim-tab-example">
-				<Tab eventKey={1} title="Assigned Tasks"> <Tasks /> </Tab>
-			    <Tab eventKey={2} title=""> </Tab>
-			    <Tab eventKey={3} title=""> </Tab>
-			</Tabs>
-
+			<Tasks /> 
          </div>
       );
    }

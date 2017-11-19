@@ -1,3 +1,36 @@
-<div>
-	<h4> TEAMS </h4>
+
+<div id="header">
+
+	<div style="background:transparent !important" class="jumbotron">
+
+  	<h2>Team</h2>
+  	<br />
+  	<h4>Manager: </h4>
+
+  	<h4>Teammates: </h4>
+  	<div id="reactstuff-team"> </div>
+
+  	<div id = "team-bar">
+	<div id="team-index"
+      data-path="<%= team_path(@conn, :index) %>"
+    &nbsp;
+ 	</div>
+
+  	 <script id="team-template" type="text/x-handlebars-template">
+      <div class="m-2">
+        <p> Liked by:
+
+        {{#each data}}
+          {{user_name}}, 
+
+		{{else}}
+		  Sorry, there is no one else on this team.
+        {{/each}} </p>                                             
+
+      </div>
+    </script>
+
+	</div>
+</div>
+
 </div>

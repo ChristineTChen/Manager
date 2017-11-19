@@ -7,11 +7,12 @@
 // in vendor, which are never wrapped in imports and
 // therefore are always executed.
 
+console.log("HELLO")
 // Import dependencies
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
+// import "phoenix_html"
 
 // Import local files
 //
@@ -23,44 +24,59 @@ import "phoenix_html"
 // insert into app.js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Header from './components/header';
 import Tasks from './components/tasks';
 import TabMenu from './components/tabs';
 
-function start() {
+
+let handlebars = require("handlebars");
+
+$(function() {
+
   let html = <div> 
-		  <TabMenu/>
+  		  <TabMenu/>
+
 	  </div>;
+	  console.log('hi there')
   let main = document.getElementById('reactstuff');
 
   ReactDOM.render(html, main);
-
 
 
   // Retrieve teams of user
   let my_manager;
   let manager;
 
-  function fetch_team() {
-  	function get_manager(data) {
-  		console.log(data);
-  		my_manager = data;
-  		//manager =
-  		
+  // let teamtemp = $($("#team-template")[0]);
+  // let code = teamtemp.html();
+  // let tmpl = handlebars.compile(code);
 
-  	}
+  // let team = $($("#team-index")[0]);
+  // let path = dd.data('path');
+  // let me = current_user_id;
 
-  	$.ajax({
-  		url: path,
-  		data: {employee_id: current_user},
-  		contentType: "application/json",
-  		dataType: "json",
-  		method: "GET",
-  		success: got_likes,
-  	});
-  }
+  // function fetch_team() {
+  // 	function get_manager(data) {
+  // 		console.log(data);
+  // 		my_manager = data;
+  // 		//manager =
+  	
+  // 	}
+
+  // 	$.ajax({
+  // 		url: path,
+  // 		data: {employee_id: current_user_id},
+  // 		contentType: "application/json",
+  // 		dataType: "json",
+  // 		method: "GET",
+  // 		success: get_manager,
+  // 	});
+  // }
+
+  // get the current user email
+  // get the ID
+  // get the manager id
+  // get all IDs with the manager id
 
 
-}
 
-$(start)
+})
