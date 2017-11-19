@@ -2,13 +2,14 @@
 <!-- GOOGLE CAL API TRIAL 1, referencing example on Google Calander API Quickstart -->
 <!-- referencing a solution for creating event.htmlLink undefined:
 https://stackoverflow.com/questions/41589499/undefined-htmllink-google-calendar-insert -->
-
-<p>Google Calendar API Quickstart</p>
+<header>
+<h3>Create a Shift for a Teammate</h3>
+</header>
 
 <!--Add buttons to initiate auth sequence and sign out-->
 <button id="authorize-button" class="btn btn-primary"style="display: none;">Authorize</button>
 <button id="signout-button" class="btn btn-primary"style="display: none;">Sign Out</button>
-<button id="create-button" class="btn btn-primary" >Create</button>
+<br/>
 <form>
   <div class="form-group row">
     <label for="summary">Summary: </label>
@@ -52,6 +53,8 @@ https://stackoverflow.com/questions/41589499/undefined-htmllink-google-calendar-
     </form>
   </div>
 </form>
+<button id="create-button" class="btn btn-primary" >Create</button>
+
 <pre id="content"></pre>
 
 <script type="text/javascript">
