@@ -12,16 +12,11 @@ class TabMenu extends React.Component {
    render() {
       return (
          <div>
-            <Navbar>
-	            <Nav pullRight>
-	            	<NavItem eventKey={1} href='#'> View Profile </NavItem>
-	            </Nav>
-            </Navbar>
 
 			<Tabs defaultActiveKey={1} animation={false} id="noanim-tab-example">
 				<Tab eventKey={1} title="Assigned Tasks"> <Tasks /> </Tab>
-			    <Tab eventKey={2} title="View Schedule"> </Tab>
-			    <Tab eventKey={3} title="View Team"> View Team </Tab>
+			    <Tab eventKey={2} title=""> </Tab>
+			    <Tab eventKey={3} title=""> </Tab>
 			</Tabs>
 
          </div>

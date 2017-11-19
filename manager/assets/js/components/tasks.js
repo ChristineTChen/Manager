@@ -18,7 +18,6 @@ class Tasks extends React.Component {
 			          <p>Description: Submit report for perishable inventory status.</p>
 			          <p>
 			            <Button bsStyle="primary">Completed!</Button>&nbsp;
-			            <Button bsStyle="default">Contact Manager</Button>
 			          </p>
 			        </Thumbnail>
 			      </Col>
@@ -29,7 +28,6 @@ class Tasks extends React.Component {
 			          <p>Description: Complete annual end-of-year employee survey.</p>
 			          <p>
 			            <Button bsStyle="primary">Completed</Button>&nbsp;
-			            <Button bsStyle="default">Contact Manager</Button>
 			          </p>
 			        </Thumbnail>
 			      </Col>
@@ -40,7 +38,6 @@ class Tasks extends React.Component {
 			          <p>Description: Restock the beverage machine.</p>
 			          <p>
 			            <Button bsStyle="primary">Completed</Button>&nbsp;
-			            <Button bsStyle="default">Contact Manager</Button>
 			          </p>
 			        </Thumbnail>
 			      </Col>
