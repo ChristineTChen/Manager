@@ -7,9 +7,18 @@ defmodule ManagerWeb.SessionController do
 
   def login(conn, %{"name" => name, "email" => email}) do
     user = %{name: name, email: email}
-    
-    conn
-    |> put_session(:current_user, user)
+
+    changeset = User.changeset(%User{}, user)
+    case find_or_insert_user(changeset) do
+      {:ok, user} ->
+        conn
+        |> put_session(:current_user, user)
+        |> redirect(to: "/")
+      {:error, _reason} ->
+        conn
+        |> put_flash(:error, "Error signing in")
+        |> redirect("/")
+    end
   end
 
   def logout(conn, _params) do
@@ -19,4 +28,14 @@ defmodule ManagerWeb.SessionController do
     |> configure_session(drop: true)
     |> redirect(to: "/")
   end
+
+
+    defp find_or_insert_user(changeset) do
+      case Repo.get_by(User, email: changeset.changes.email) do
+        nil ->
+          Repo.insert(changeset)
+        user ->
+          {:ok, user}
+      end
+    end
 end

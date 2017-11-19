@@ -1,6 +1,6 @@
 defmodule ManagerWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :manager
-
+  
   socket "/socket", ManagerWeb.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.

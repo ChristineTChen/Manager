@@ -39,22 +39,7 @@
 
       <ul class="navbar-nav ml-auto">
 
-<!--
-        <%= if @current_user do %>
 
-        <div id="app-signout-button">
-        <%= @current_user.name %>
-
-        <%= link "Sign Out", to: session_path(@conn, :logout), method: :logout, class: "btn btn-danger"%>
-      </div>
-      <% else %>
-      <div id="app-authorize-button">
-      <a class="btn btn-primary" href="<%= session_path @conn, :index, "google" %>">
-      <i class="fa fa-google"></i>
-      Sign in with Google
-    </a>
-  </div>
-  <% end %> -->
 
   <button id="app-authorize-button" class="btn btn-primary"style="display: none;">Authorize</button>
   <button id="app-signout-button" class="btn btn-primary"style="display: none;">Sign Out</button>
@@ -77,6 +62,7 @@
   </main>
 
 </div> <!-- /container -->
+
 <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
 <script type="text/javascript">
@@ -138,8 +124,6 @@ function updateSigninStatus(isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
     logName();
-    "<%= session_path @conn, :login, "window.userName", "window.userEmail" %>";
-
   } else {
     authorizeButton.style.display = 'block';
     signoutButton.style.display = 'none';
