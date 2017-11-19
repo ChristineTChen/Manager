@@ -138,7 +138,7 @@ function updateSigninStatus(isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
     logName();
-    "<%= to: session_path @conn, :login, "window.userName", "window.userEmail" %>";
+    "<%= session_path @conn, :login, "window.userName", "window.userEmail" %>";
 
   } else {
     authorizeButton.style.display = 'block';

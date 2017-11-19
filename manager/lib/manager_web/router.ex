@@ -17,8 +17,6 @@ defmodule ManagerWeb.Router do
   scope "/auth", ManagerWeb do
     pipe_through :browser
 
-    post "/sessions", SessionController, :login
-    delete "/sessions", SessionController, :logout
 
     get "/:provider", AuthController, :index
     get "/:provider/callback", AuthController, :callback
@@ -31,6 +29,9 @@ defmodule ManagerWeb.Router do
 
   scope "/", ManagerWeb do
     pipe_through :browser # Use the default browser stack
+
+    post "/sessions", SessionController, :login
+    delete "/sessions", SessionController, :logout
 
     # google cal resource
     get "/gcal", GCalController, :index
