@@ -5,20 +5,23 @@ defmodule ManagerWeb.SessionController do
   alias Manager.User
   alias Manager.Repo
 
-  def login(conn, %{"name" => name, "email" => email}) do
-    user = %{name: name, email: email}
+  def login(conn, %{"email" => email}) do
+    user = %{user_email: email, token: ""}
 
     changeset = User.changeset(%User{}, user)
-    case find_or_insert_user(changeset) do
-      {:ok, user} ->
-        conn
-        |> put_session(:current_user, user)
-        |> redirect(to: "/")
-      {:error, _reason} ->
-        conn
-        |> put_flash(:error, "Error signing in")
-        |> redirect("/")
-    end
+    conn
+    |> put_session(:current_user, user)
+    |> redirect(to: "/")
+    # case find_or_insert_user(changeset) do
+    #   {:ok, user} ->
+    #     conn
+    #     |> put_session(:current_user, user)
+    #     |> redirect(to: "/")
+    #   {:error, _reason} ->
+    #     conn
+    #     |> put_flash(:error, "Error signing in")
+    #     |> redirect("/")
+    # end
   end
 
   def logout(conn, _params) do
@@ -30,12 +33,12 @@ defmodule ManagerWeb.SessionController do
   end
 
 
-    defp find_or_insert_user(changeset) do
-      case Repo.get_by(User, email: changeset.changes.email) do
-        nil ->
-          Repo.insert(changeset)
+  defp find_or_insert_user(changeset) do
+    case Repo.get_by(User, email: changeset.changes.email) do
+      nil ->
+        Repo.insert(changeset)
         user ->
           {:ok, user}
       end
     end
-end
+  end

@@ -3,7 +3,7 @@
 <!-- referencing a solution for creating event.htmlLink undefined:
 https://stackoverflow.com/questions/41589499/undefined-htmllink-google-calendar-insert -->
 
-<p>Google Calendar API Quickstart</p>
+<p>Make sure you are signed in on top!</p>
 
 <!--Add buttons to initiate auth sequence and sign out-->
 
