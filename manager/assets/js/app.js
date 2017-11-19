@@ -18,7 +18,7 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
+import socket from "./socket"
 
 // insert into app.js
 import React from 'react';
@@ -28,7 +28,7 @@ import Tasks from './components/tasks';
 import TabMenu from './components/tabs';
 
 function start() {
-  let html = <div> 
+  let html = <div>
 		  <TabMenu/>
 	  </div>;
   let main = document.getElementById('reactstuff');

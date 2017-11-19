@@ -63,7 +63,6 @@
 
 </div> <!-- /container -->
 
-<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
 <script type="text/javascript">
 // Client ID and API key from the Developer Console
@@ -163,6 +162,7 @@ function handleSignoutClick(event) {
 
 console.log("loading script");
 </script>
+<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
 
 <script async defer src="https://apis.google.com/js/api.js"
 onload="this.onload=function(){};handleAppLoad()"

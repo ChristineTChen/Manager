@@ -2,7 +2,7 @@ defmodule ManagerWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", ManagerWeb.RoomChannel
+  channel "session:*", ManagerWeb.SessionChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
