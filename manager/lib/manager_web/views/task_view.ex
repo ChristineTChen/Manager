@@ -12,6 +12,9 @@ defmodule ManagerWeb.TaskView do
 
   def render("task.json", %{task: task}) do
     %{id: task.id,
-      desc: task.desc}
+      desc: task.desc,
+      manager_id: task.manager_id,
+      assignee_id: task.assignee_id,
+    }
   end
 end
