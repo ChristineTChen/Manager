@@ -15,6 +15,7 @@ defmodule ManagerWeb.TaskView do
       desc: task.desc,
       manager_id: task.manager_id,
       assignee_id: task.assignee_id,
+      inserted_at: task.inserted_at,
     }
   end
 end

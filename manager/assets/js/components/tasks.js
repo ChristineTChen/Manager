@@ -4,43 +4,66 @@ import {PageHeader, Grid, Row, Col, Thumbnail, Button} from 'react-bootstrap';
 
 class Tasks extends React.Component {
 
+	constructor(props) {
+		super(props);
+
+
+		this.state = {
+
+			tasks: []
+		}
+
+		this.loadTasks();
+	}
+
+	loadTasks() {
+	  	$.ajax({
+	  		url: '/api/v1/tasks',
+	  		dataType: "json",
+	  		method: "GET",
+	  		success: (resp) => {
+	  			this.setState({
+	  				tasks: resp.data 
+	  			})
+	  		},
+	  	});
+	}
+
+	deleteTask(taskId) {
+	  	$.ajax({
+	  		url: '/api/v1/tasks/' + taskId,
+	  		dataType: "json",
+	  		method: "DELETE",
+	  		success: (resp) => {
+	  			this.setState({
+	  				tasks: resp.data 
+	  			})
+	  		},
+	  	});
+	}
+
 	render() {
       return (
       	<div>
-            <PageHeader> Your assigned tasks</PageHeader>
+            <PageHeader>Bulletin Board</PageHeader>
 
             <Grid>
 			    <Row>
-			      <Col xs={6} md={4}>
-			        <Thumbnail>
-			          <h3>Task 1</h3>
-			          <h4> Due date: 12/12/2017</h4>
-			          <p>Description: Submit report for perishable inventory status.</p>
-			          <p>
-			            <Button bsStyle="primary">Completed!</Button>&nbsp;
-			          </p>
-			        </Thumbnail>
-			      </Col>
-			      <Col xs={6} md={4}>
-			        <Thumbnail>
-			          <h3>Task 2</h3>
-			          <h4> Due date: 12/31/2017</h4>
-			          <p>Description: Complete annual end-of-year employee survey.</p>
-			          <p>
-			            <Button bsStyle="primary">Completed</Button>&nbsp;
-			          </p>
-			        </Thumbnail>
-			      </Col>
-			      <Col xs={6} md={4}>
-			        <Thumbnail>
-			          <h3>Task 3</h3>
-			          <h4> Due date: 1/5/2017</h4>
-			          <p>Description: Restock the beverage machine.</p>
-			          <p>
-			            <Button bsStyle="primary">Completed</Button>&nbsp;
-			          </p>
-			        </Thumbnail>
-			      </Col>
+			    {this.state.tasks.map((task, index) => {
+			    	return (
+			    		<Col xs={6} md={4} key={index + task.desc}>
+					        <Thumbnail>
+					          <h3>Task {index + 1}</h3>
+					          <p>Description: {task.desc}</p>
+					          <p>Date posted: {task.inserted_at}</p>
+					          <p>
+					            <Button onClick={this.deleteTask.bind(this, task.id)} bsStyle="primary">Completed!</Button>&nbsp;
+					          </p>
+					        </Thumbnail>
+					      </Col>
+					      )
+			    })}
+			    
 			    </Row>
 			</Grid>
 		</div>

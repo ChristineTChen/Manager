@@ -29,10 +29,10 @@
           <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-               <%= link "Tasks", to: page_path(@conn, :index), class: "nav-link" %>
+               <%= link "My Tasks", to: page_path(@conn, :index), class: "nav-link" %>
              </li>
              <li class="nav-item">
-               <%= link "Teams", to: teams_path(@conn, :index), class: "nav-link" %>
+               <%= link "My Teams", to: teams_path(@conn, :index), class: "nav-link" %>
              </li>
            </ul>
            <% end %>

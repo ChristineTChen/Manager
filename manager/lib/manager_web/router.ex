@@ -36,7 +36,7 @@ defmodule ManagerWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", ManagerWeb do
+  scope "/api/v1", ManagerWeb do
     pipe_through :api
     
     resources "/users", UserController, except: [:new, :edit]

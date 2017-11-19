@@ -7,7 +7,7 @@
 
   <%= if @current_user do %>
   	<h4>Welcome, <%= @current_user.name %>!</h4>
-  	<div id="reactstuff"> </div>
+  	
   <% else %>
 
   	<h4>Welcome to Manager App!</h4>
@@ -17,6 +17,8 @@
  	 
   <% end %>
 
+
+	<div id="reactstuff"> </div>
 
 	</div>
 

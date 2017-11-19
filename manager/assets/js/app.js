@@ -11,7 +11,7 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
+//import "phoenix_html"
 
 // Import local files
 //
@@ -24,7 +24,6 @@ import "phoenix_html"
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/header';
-import Tasks from './components/tasks';
 import TabMenu from './components/tabs';
 
 function start() {
@@ -34,31 +33,6 @@ function start() {
   let main = document.getElementById('reactstuff');
 
   ReactDOM.render(html, main);
-
-
-
-  // Retrieve teams of user
-  let my_manager;
-  let manager;
-
-  function fetch_team() {
-  	function get_manager(data) {
-  		console.log(data);
-  		my_manager = data;
-  		//manager =
-  		
-
-  	}
-
-  	$.ajax({
-  		url: path,
-  		data: {employee_id: current_user},
-  		contentType: "application/json",
-  		dataType: "json",
-  		method: "GET",
-  		success: got_likes,
-  	});
-  }
 
 
 }
