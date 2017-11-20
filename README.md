@@ -18,4 +18,5 @@ Project Status: Manager app
  
 Experiment Repository: https://github.com/gummybear1202/CS4550_ProjectExp
 
+Attribution: Google Calendar QuickStart guide, HexDocs, Prof. Nat Tuck's Lecture notes, react-bootstrap docs
 
