@@ -22,6 +22,15 @@ defmodule ManagerWeb.UpdatesChannel do
     {:noreply, socket}
   end
 
+  def handle_in("new_msg", %{"id" => id, "manager_id" => manager_id, "assignee_id" => assignee_id, "desc" => desc}, socket) do
+    broadcast! socket, "new_msg", %{"id" => id, "manager_id" => manager_id, "assignee_id" => assignee_id, "desc" => desc}
+    {:noreply, socket}
+  end
+
+  def handle_out("new_msg", payload, socket) do
+    push socket, "new_msg", payload
+    {:noreply, socket}
+  end
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true

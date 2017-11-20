@@ -18,14 +18,31 @@ class Tasks extends React.Component {
 		this.createTask = this.createTask.bind(this)
 
 		this.loadTasks();
+		let bulletBoard = $("#bulletBoard")
 
 		this.socket = new Socket("/socket")
 		this.socket.connect();
 
 		this.channel = this.socket.channel("updates:lobby")
+		this.channel.join()
+		  .receive("ok", resp => { console.log("Joined successfully", resp) })
+		  .receive("error", resp => { console.log("Unable to join", resp) })
+		this.channel.on("new_msg", payload => {
+			let newTask = `<Col xs={6} md={4} key=${index + payload.task.desc}>
+					        <Thumbnail>
+					          <h3>Task #${payload.id}</h3>
+					          <p>Description: ${payload.desc}</p>
+					          <p>Date posted: ${payload.inserted_at}</p>
+					          <p>
+					            <Button onClick={this.deleteTask.bind(this, task.id)} bsStyle="primary">Completed!</Button>&nbsp;
+					          </p>
+					        </Thumbnail>
+					      </Col>`
 
+			bulletBoard.append(newTask);
+			this.loadTasks
+		});
 	};
-
 
 	loadTasks() {
 	  	$.ajax({
@@ -91,7 +108,7 @@ class Tasks extends React.Component {
 			  </Form>
 
             <Grid>
-			    <Row>
+			    <Row id="bulletBoard">
 			    {this.state.tasks.map((task, index) => {
 			    	return (
 			    		<Col xs={6} md={4} key={index + task.desc}>
