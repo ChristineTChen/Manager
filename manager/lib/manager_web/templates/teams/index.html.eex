@@ -1,3 +1,18 @@
-<div>
-	<h4> TEAMS </h4>
+<div class="container">
+
+	<h4> Teammates </h4>
+	<%= for user <- @users do %>
+
+  <div class="well-lg">
+    <div class="card hovercard">
+
+     <div class="card-body">
+       <h4 class="card-title"> <%= user.name %>'s Bio: </h4>
+       Email: <%= user.email %>
+     </p>
+
+   </div>
+</div>
+</div>
+	<%end %>
 </div>
