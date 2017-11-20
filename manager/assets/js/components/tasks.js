@@ -1,6 +1,7 @@
 import React from 'react';
 import {PageHeader, Grid, Row, Col, Thumbnail, Button, Form, FormGroup, ControlLabel, FormControl} from 'react-bootstrap';
 import moment from 'moment';
+import {Socket} from "phoenix";
 class Tasks extends React.Component {
 
 	constructor(props) {
@@ -17,7 +18,14 @@ class Tasks extends React.Component {
 		this.createTask = this.createTask.bind(this)
 
 		this.loadTasks();
-	}
+
+		this.socket = new Socket("/socket")
+		this.socket.connect();
+
+		this.channel = this.socket.channel("updates:lobby")
+
+	};
+
 
 	loadTasks() {
 	  	$.ajax({
